@@ -1,0 +1,472 @@
+{
+   "title":"Verizon-CAS-Instance",
+   "timeGrain":"hour",
+   "cards":[
+     {
+           "id": "worldmap-image",
+           "content": {
+               "alt": "Current Locations",
+               "hotspots": [
+                   {
+                       "icon" : "information--filled",
+                       "content": {
+                           "attributes": [
+                              {
+                                "dateSourceId":"Name_id",
+                                "label":"Name"
+                              },
+                               {
+                                  "dataSourceId":"S_humidity_KMeansAnonmalyScore_id",
+                                  "label":"Humdity Score"
+                               },
+                               {
+                                  "dataSourceId":"S_temperature_KMeansAnonmalyScore_id",
+                                  "label":"Temperature Score"
+                               },
+                               {
+                                  "dataSourceId":"S_pressure_KMeansAnomalyScore_id",
+                                  "label":"Pressure Score"
+                               }
+                           ]
+                       },
+                       "locations": [
+                           {
+                               "xDataSourceId": "map_x_A_Verizon_CAS_last",
+                               "yDataSourceId": "map_y_A_Verizon_CAS_last"
+                           }
+                       ],
+                       "thresholds": [
+                           {
+                               "color": "green",
+                               "comparison": "<=",
+                               "dataSourceId": "S_humidity_KMeansAnonmalyScore",
+                               "icon": "information--filled",
+                               "isHotspot": true,
+                               "value": 0.1
+                           },
+                           {
+                               "color": "red",
+                               "comparison": ">",
+                               "dataSourceId": "S_humidity_KMeansAnonmalyScore",
+                               "icon": "warning--alt--filled",
+                               "isHotspot": true,
+                               "value": 0.1
+                           }
+                       ]
+                   }
+               ],
+               "image": "worldmap"
+           },
+           "dataSource": {
+               "attributes": [
+                   {
+                       "attribute": "map_x_A_Verizon_CAS_last",
+                       "id": "map_x_A_Verizon_CAS_last"
+                   },
+                   {
+                       "attribute": "map_y_A_Verizon_CAS_last",
+                       "id": "map_y_A_Verizon_CAS_last"
+                   },
+                   {
+                       "attribute": "deviceid",
+                       "id": "deviceid"
+                   },
+                   {
+                      "attribute":"S_humidity_KMeansAnonmalyScore",
+                      "id":"S_humidity_KMeansAnonmalyScore_id"
+                   },
+                   {
+                      "attribute":"S_temperature_KMeansAnomalyScore",
+                      "id":"S_temperature_KMeansAnonmalyScore_id"
+                   },
+                   {
+                     "attribute":"S_pressure_KMeansAnomalyScore",
+                     "id":"S_pressure_KMeansAnomalyScore_id"
+                   }
+                   ,
+                   {
+                     "attribute":"Name",
+                     "id":"Name_id"
+                   }
+               ],
+              "groupBy": [
+                   "deviceid"
+               ],
+
+               "range": {
+                   "count": -1,
+                   "interval": "day",
+                   "type": "periodToDate"
+               }
+           },
+           "size": "LARGE",
+           "title": "Asset Location",
+           "type": "IMAGE"
+       },
+       {
+         "id":"acard-lastupdated-value",
+         "dataSource":{
+            "attributes":[
+               {
+                  "aggregator":"last",
+                  "attribute":"lastupdated_A_Verizon_CAS_last",
+                  "id":"lastupdated_A_Verizon_CAS_last"
+               }
+            ]
+         },
+         "content":{
+            "attributes":[
+               {
+                  "dataSourceId":"lastupdated_A_Verizon_CAS_last",
+                  "label":"Last lastupdated"
+               }
+            ]
+         },
+         "size":"SMALLWIDE",
+         "title":"lastupdated",
+         "type":"VALUE"
+       },
+       {
+          "id":"atemperature-high-alerts",
+          "dataSource":{
+             "attributes":[
+                {
+                   "aggregator":"count",
+                   "attribute":"Temperature_High_Alert",
+                   "id":"Temperature_High_Alert"
+                }
+             ]
+          },
+          "content":{
+          	"attributes":[
+                {
+                   "dataSourceId":"Temperature_High_Alert",
+                   "label":"Count"
+                }
+             ]
+          },
+          "size":"SMALLWIDE",
+          "title":"Temperature High Alert Notices",
+          "type":"VALUE"
+       },
+       {
+          "id":"ahumidity-high-alerts",
+          "dataSource":{
+             "attributes":[
+                {
+                   "aggregator":"count",
+                   "attribute":"Humidity_High_Alert",
+                   "id":"Humidity_High_Alert"
+                }
+             ]
+          },
+          "content":{
+          	"attributes":[
+                {
+                   "dataSourceId":"Humidity_High_Alert",
+                   "label":"Count"
+                }
+             ]
+
+          },
+          "size":"SMALLWIDE",
+          "title":"Humdity Alert Notices",
+          "type":"VALUE"
+       },
+        {
+           "id":"apressure-high-alerts",
+           "dataSource":{
+              "attributes":[
+                 {
+                    "aggregator":"count",
+                    "attribute":"Pressure_High_Alert",
+                    "id":"Pressure_High_Alert"
+                 }
+              ]
+           },
+           "content":{
+             "attributes":[
+                 {
+                    "dataSourceId":"Pressure_High_Alert",
+                    "label":"Count"
+                 }
+              ]
+           },
+           "size":"SMALLWIDE",
+           "title":"Pressure Alert Notices",
+           "type":"VALUE"
+        },
+       {
+        "id": "alerts",
+        "size": "LARGEWIDE",
+        "title": "Alerts in the last 3 days",
+        "type": "ALERT",
+        "dataSource": {
+            "range": {
+                "count": -3,
+                "interval": "day"
+            },
+            "type": "alert"
+        }
+      },
+      {
+         "id":"acard-humidity-timeseries",
+         "dataSource":{
+            "attributes":[
+               {
+                  "attribute":"humidity",
+                  "id":"humidity"
+               },
+               {
+                  "attribute":"predictions_humidity",
+                  "id":"predictions_humidity"
+               },
+               {
+                  "attribute":"predictions_humidity_reg",
+                  "id":"predictions_humidity_reg"
+               }
+            ],
+            "range":{
+               "count":-24,
+               "interval":"hour"
+            }
+         },
+         "content":{
+            "series":[
+               {
+                  "dataSourceId":"humidity",
+                  "label":"Humidity"
+               },
+               {
+                 "dataSourceId":"predictions_humidity",
+                 "label":"Prediction"
+               },
+               {
+                 "dataSourceId":"predictions_humidity_reg",
+                 "label":"Prediction-Reg"
+               }
+            ],
+            "xLabel":"Time",
+            "yLabel":"Humidity"
+         },
+         "size":"LARGE",
+         "title":"Humidity TimeSeries",
+         "type":"TIMESERIES"
+      },
+      {
+         "id":"ahumidity-kmeansanomaly-scoring",
+         "dataSource":{
+            "attributes":[
+               {
+                  "attribute":"S_humidity_KMeansAnonmalyScore",
+                  "id":"S_humidity_KMeansAnonmalyScore"
+               }
+            ],
+            "range":{
+               "count":-24,
+               "interval":"hour"
+            }
+         },
+         "content":{
+            "series":[
+               {
+                  "dataSourceId":"S_humidity_KMeansAnonmalyScore",
+                  "label":"KMeans Score"
+               }
+            ],
+            "xLabel":"Time",
+            "yLabel":"Score"
+         },
+         "size":"LARGE",
+         "title":"Humidity Anomaly Score",
+         "type":"TIMESERIES"
+      },
+      {
+         "id":"acard-pressure-timeseries",
+         "dataSource":{
+            "attributes":[
+               {
+
+                  "attribute":"pressure",
+                  "id":"pressure"
+               },
+               {
+                  "attribute":"predictions_pressure",
+                  "id":"predictions_pressure"
+               },
+               {
+                  "attribute":"predictions_pressure_reg",
+                  "id":"predictions_pressure_reg"
+               }
+            ],
+            "range":{
+               "count":-24,
+               "interval":"hour"
+            },
+
+            "additionalData" : {
+               "type": "alert",
+               "dataFilter": {
+                  "name": "Pressure_High_Alert"
+               }
+            }
+         },
+         "content":{
+            "series":[
+               {
+                  "dataSourceId":"pressure",
+                  "label":"Pressure"
+               },
+               {
+                 "dataSourceId":"predictions_pressure",
+                 "label":"Prediction"
+               },
+               {
+                 "dataSourceId":"predictions_pressure_reg",
+                 "label":"Prediction-Reg"
+               }
+            ],
+            "xLabel":"Time",
+            "yLabel":"Pressure"
+         },
+         "size":"LARGE",
+         "title":"Pressure",
+         "type":"TIMESERIES"
+      },
+      {
+         "id":"apressure-kmeansanomaly-scoring",
+         "dataSource":{
+            "attributes":[
+               {
+                  "attribute":"S_pressure_KMeansAnomalyScore",
+                  "id":"S_pressure_KMeansAnomalyScore"
+               }
+            ],
+            "range":{
+               "count":-24,
+               "interval":"hour"
+            }
+         },
+         "content":{
+            "series":[
+               {
+                  "dataSourceId":"S_pressure_KMeansAnomalyScore",
+                  "label":"KMeans Score"
+               }
+            ],
+            "xLabel":"Time",
+            "yLabel":"Score"
+         },
+         "size":"LARGE",
+         "title":"Pressure Anomaly Score",
+         "type":"TIMESERIES"
+      },
+      {
+         "id":"acard-temperature-timeseries",
+         "dataSource":{
+            "attributes":[
+               {
+                  "attribute":"temperature",
+                  "id":"temperature"
+               },
+               {
+                  "attribute":"predictions_temperature",
+                  "id":"predictions_temperature"
+               },
+               {
+                  "attribute":"predictions_temperature_reg",
+                  "id":"predictions_temperature_reg"
+               }
+            ],
+            "range":{
+               "count":-24,
+               "interval":"hour"
+            },
+            "additionalData" : {
+               "type": "alert",
+               "dataFilter": {
+                  "name": "Temperature_High_Alert"
+               }
+            }
+         },
+         "content":{
+            "series":[
+               {
+                  "dataSourceId":"temperature",
+                  "label":"Temperature"
+               },
+               {
+                 "dataSourceId":"predictions_temperature",
+                 "label":"Prediction"
+               },
+               {
+                 "dataSourceId":"predictions_temperature_reg",
+                 "label":"Prediction-Reg"
+               }
+            ],
+            "xLabel":"Time",
+            "yLabel":"Temp"
+         },
+         "size":"LARGE",
+         "title":"Temperature in Celcius",
+         "type":"TIMESERIES"
+      },
+      {
+         "id":"atemperature-kmeansanomaly-scoring",
+         "dataSource":{
+            "attributes":[
+               {
+                  "attribute":"S_temperature_KMeansAnomalyScore",
+                  "id":"S_temperature_KMeansAnomalyScore"
+               }
+            ],
+            "range":{
+               "count":-24,
+               "interval":"hour"
+            }
+         },
+         "content":{
+            "series":[
+               {
+                  "dataSourceId":"S_temperature_KMeansAnomalyScore",
+                  "label":"KMeans Score"
+               }
+            ],
+            "xLabel":"Time",
+            "yLabel":"Score"
+         },
+         "size":"LARGE",
+         "title":"Temperature Anomaly Score",
+         "type":"TIMESERIES"
+      },
+     {
+        "id":"acard-battery-timeseries",
+        "dataSource":{
+           "attributes":[
+              {
+
+                 "attribute":"battery",
+                 "id":"battery"
+              }
+           ],
+           "range":{
+              "count":-24,
+              "interval":"day"
+           }
+        },
+        "content":{
+           "series":[
+              {
+                 "dataSourceId":"battery",
+                 "label":"battery"
+              }
+           ],
+           "xLabel":"Time",
+           "yLabel":"battery"
+        },
+        "size":"LARGEWIDE",
+        "title":"Battery Daily TimeSeries",
+        "type":"TIMESERIES"
+     }
+   ]
+}

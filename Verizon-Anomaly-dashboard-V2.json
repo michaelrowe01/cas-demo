@@ -1,0 +1,431 @@
+{
+   "title":"A_Verizon_CAS",
+   "timeGrain":"day",
+   "cards":[
+      {
+            "id": "worldmap-image",
+            "content": {
+                "alt": "Current Locations",
+                "zoomMax" : 5,
+                "hotspots": [
+                    {
+                      "icon" : "information--filled",
+                        "content": {
+                            "attributes": [
+                              {
+                                "attribute":"Name_id",
+                                "label":"Name"
+                              },
+                                {
+                                   "dataSourceId":"S_humidity_KMeansAnonmalyScore_id",
+                                   "label":"Humidity Score"
+                                },
+                                {
+                                   "dataSourceId":"humidity_id",
+                                   "label":"Humidity"
+                                },
+                                {
+                                   "dataSourceId":"S_pressure_KMeansAnomalyScore_id",
+                                   "label":"Pressure Score"
+                                },
+                                {
+                                   "dataSourceId":"pressure_id",
+                                   "label":"Pressure"
+                                },
+                                {
+                                   "dataSourceId":"S_temperature_KMeansAnomalyScore_id",
+                                   "label":"Temperature Score"
+                                },
+                                {
+                                   "dataSourceId":"temperature_id",
+                                   "label":"Temperature"
+                                }
+                            ]
+                        },
+                        "locations": [
+                            {
+                                "xDataSourceId": "map_x_A_Verizon_CAS_last",
+                                "yDataSourceId": "map_y_A_Verizon_CAS_last"
+                            }
+                        ],
+                        "thresholds": [
+                            {
+                                "color": "red",
+                                "comparison": "<=",
+                                "dataSourceId": "S_humidity_KMeansAnonmalyScore",
+                                "icon": "icon--close--solid",
+                                "isHotspot": true,
+                                "value": 0.9
+                            },
+                            {
+                                "color": "yellow",
+                                "comparison": ">=",
+                                "dataSourceId": "S_humidity_KMeansAnonmalyScore",
+                                "icon": "icon--close--solid",
+                                "isHotspot": true,
+                                "value": 1.0
+                            },
+                            {
+                                "color": "green",
+                                "comparison": ">",
+                                "dataSourceId": "S_humidity_KMeansAnonmalyScore",
+                                "icon": "icon--close--solid",
+                                "isHotspot": true,
+                                "value": 2.0
+                            }
+                        ]
+                    }
+                ],
+                "image": "worldmap"
+            },
+            "dataSource": {
+                "attributes": [
+                    {
+                        "attribute": "map_x_A_Verizon_CAS_last",
+                        "id": "map_x_A_Verizon_CAS_last"
+                    },
+                    {
+                        "attribute": "map_y_A_Verizon_CAS_last",
+                        "id": "map_y_A_Verizon_CAS_last"
+                    },
+                    {
+                        "attribute": "Name",
+                        "id": "Name_id"
+                    },
+                    {
+                      "attribute":"lastupdated",
+                       "id":"lastupdated_id"
+                    },
+                    {
+                       "attribute":"S_humidity_KMeansAnonmalyScore",
+                       "id":"S_humidity_KMeansAnonmalyScore_id"
+                    },
+                    {
+                       "attribute":"S_pressure_KMeansAnomalyScore",
+                       "id":"S_pressure_KMeansAnomalyScore_id"
+                    },
+                    {
+                       "attribute":"S_temperature_KMeansAnomalyScore",
+                       "id":"S_temperature_KMeansAnomalyScore_id"
+                    },
+                    {
+                       "attribute":"humidity",
+                       "id":"humidity_id"
+                    },
+                    {
+                       "attribute":"pressure",
+                       "id":"pressure_id"
+                    },
+                    {
+                       "attribute":"temperature",
+                       "id":"temperature_id"
+                    }
+                ],
+               "groupBy": [
+                    "deviceid"
+                ],
+
+                "range": {
+                    "count": -1,
+                    "interval": "day",
+                    "type": "periodToDate"
+                }
+            },
+            "size": "LARGE",
+            "title": "Asset Location",
+            "type": "IMAGE"
+        },
+      {
+          "id": "PressAnomalyAlertCardTable",
+          "dataSource": {
+              "attributes": [
+                {
+                      "aggregator": "count",
+                      "attribute": "Humidity_High_Alert",
+                      "id": "Humidity_High_Alert_id"
+                  },
+                  {
+                      "aggregator": "count",
+                      "attribute": "Pressure_High_Alert",
+                      "id": "Pressure_High_Alert_id"
+                  },
+                  {
+                      "aggregator": "count",
+                      "attribute": "Temperature_High_Alert",
+                      "id": "Temperature_High_Alert_id"
+                  }
+              ],
+              "groupBy": [
+                  "Name"
+              ]
+          },
+          "content": {
+              "columns": [
+                  {
+                      "dataSourceId": "Name",
+                      "label": "Asset"
+                  }
+              ],
+              "thresholds": [
+                  {
+                      "dataSourceId": "Humidity_High_Alert_id",
+                      "comparison": "<=",
+                      "value": 9,
+                      "showOnContent": true,
+                      "icon": "Humidity",
+                      "label": "Humdity Severity",
+                      "severity": 3
+                  },
+                  {
+                      "dataSourceId": "Humidity_High_Alert_id",
+                      "comparison": ">",
+                      "value": 10,
+                      "showOnContent": true,
+                      "icon": "Humidity",
+                      "label": "Humidity Severity",
+                      "severity": 2
+                  },
+                  {
+                      "dataSourceId": "Humidity_High_Alert_id",
+                      "comparison": ">",
+                      "value": 20,
+                      "showOnContent": true,
+                      "icon": "Humidity",
+                      "label": "Humdity Severity",
+                      "severity": 1
+                  },
+                  {
+                      "dataSourceId": "Pressure_High_Alert_id",
+                      "comparison": "<=",
+                      "value": 9,
+                      "showOnContent": true,
+                      "icon": "Operation gauge",
+                      "label": "Pressure Severity",
+                      "severity": 3
+                  },
+                  {
+                      "dataSourceId": "Pressure_High_Alert_id",
+                      "comparison": ">",
+                      "value": 10,
+                      "showOnContent": true,
+                      "icon": "Operation gauge",
+                      "label": "Pressure Severity",
+                      "severity": 2
+                  },
+                  {
+                      "dataSourceId": "Pressure_High_Alert_id",
+                      "comparison": ">",
+                      "value": 20,
+                      "showOnContent": true,
+                      "icon": "Operation gauge",
+                      "label": "Pressure Severity",
+                      "severity": 1
+                  },
+                  {
+                      "dataSourceId": "Temperature_High_Alert_id",
+                      "comparison": "<=",
+                      "value": 9,
+                      "showOnContent": true,
+                      "icon":"Temperature",
+                      "label": "Temperature Severity",
+                      "severity": 3
+                  },
+                  {
+                      "dataSourceId": "Temperature_High_Alert_id",
+                      "comparison": ">",
+                      "value": 10,
+                      "showOnContent": true,
+                      "icon":"Temperature",
+                      "label": "Temperature Severity",
+                      "severity": 2
+                  },
+                  {
+                      "dataSourceId": "Temperature_High_Alert_id",
+                      "comparison": ">",
+                      "value": 20,
+                      "showOnContent": true,
+                      "icon":"Temperature",
+                      "label": "Temperature Severity",
+                      "severity": 1
+                  }
+              ]
+          },
+          "size": "LARGE",
+          "title": "Anomaly Alert Notices",
+          "type": "TABLE"
+      },
+      {
+            "id": "card-device-table",
+            "dataSource": {
+               "attributes":[
+                  {
+                     "aggregator" : "last",
+                     "attribute" : "entity_id_A_Verizon_CAS_last",
+                     "id" : "entity_id_ID"
+                  },
+                  {
+                     "aggregator" : "last",
+                     "attribute" : "battery_A_Verizon_CAS_last",
+                     "id" : "battery_ID"
+                  },
+                  {
+                     "aggregator" : "last",
+                     "attribute" : "humidity_A_Verizon_CAS_last",
+                     "id" : "humidity_ID"
+                  },
+                  {
+                     "aggregator" : "last",
+                     "attribute" : "light_A_Verizon_CAS_last",
+                     "id" : "light_ID"
+                  },
+                  {
+                     "aggregator" : "last",
+                     "attribute" : "longitude_A_Verizon_CAS_last",
+                     "id" : "longitude_ID"
+                  },
+                  {
+                     "aggregator" : "last",
+                     "attribute" : "latitude_A_Verizon_CAS_last",
+                     "id" : "latitude_ID"
+                  },
+                  {
+                     "aggregator" : "last",
+                     "attribute" : "accelx_A_Verizon_CAS_last",
+                     "id" : "accelx_ID"
+                  },
+                  {
+                     "aggregator" : "last",
+                     "attribute" : "accely_A_Verizon_CAS_last",
+                     "id" : "accely_ID"
+                  },
+                  {
+                     "aggregator" : "last",
+                     "attribute" : "motionInX_A_Verizon_CAS_last",
+                     "id" : "motionInX_ID"
+                  },
+                  {
+                     "aggregator" : "last",
+                     "attribute" : "motionInY_A_Verizon_CAS_last",
+                     "id" : "motionInY_ID"
+                  },
+                  {
+                     "aggregator" : "last",
+                     "attribute" : "motionInZ_A_Verizon_CAS_last",
+                     "id" : "motionInZ_ID"
+                  },
+                  {
+                     "aggregator" : "last",
+                     "attribute" : "signalStrength_A_Verizon_CAS_last",
+                     "id" : "signalStrength_ID"
+                  },
+                  {
+                     "aggregator" : "last",
+                     "attribute" : "temperature_A_Verizon_CAS_last",
+                     "id" : "temperature_ID"
+                  },
+                  {
+                     "aggregator" : "last",
+                     "attribute" : "type_A_Verizon_CAS_last",
+                     "id" : "type_ID"
+                  }
+               ],
+               "range":{
+                  "type":"rolling",
+                  "count":-24,
+                  "interval":"hour"
+               },
+               "groupBy": [
+                  "Name"
+               ]
+            },
+            "content": {
+               "columns": [
+                  {
+                     "dataSourceId":"Name",
+                     "label":"Asset"
+                  },
+                  {
+                     "dataSourceId":"battery_ID",
+                     "label":"Battery"
+                  },
+                  {
+                     "dataSourceId":"humidity_ID",
+                     "label":"Humidity"
+                  },
+                  {
+                     "dataSourceId":"light_ID",
+                     "label":"Light"
+                  },
+                  {
+                     "dataSourceId":"longitude_ID",
+                     "label":"Longitude"
+                  },
+                  {
+                     "dataSourceId":"latitude_ID",
+                     "label":"Latitude"
+                  },
+                  {
+                     "dataSourceId":"accelx_ID",
+                     "label":"Accel X"
+                  },
+                  {
+                     "dataSourceId":"accely_ID",
+                     "label":"Accel Y"
+                  },
+                  {
+                     "dataSourceId":"motionInX_ID",
+                     "label":"Motion In X"
+                  },
+                  {
+                     "dataSourceId":"motionInY_ID",
+                     "label":"Motion In Y"
+                  },
+                  {
+                     "dataSourceId":"motionInZ_ID",
+                     "label":"Motion In Z"
+                  },
+                  {
+                     "dataSourceId":"signalStrength_ID",
+                     "label":"Signal Strength"
+                  },
+                  {
+                     "dataSourceId":"temperature_ID",
+                     "label":"Temperature"
+                  },
+                  {
+                     "dataSourceId":"type_ID",
+                     "label":"Type"
+                  }
+               ]
+            },
+            "size": "LARGEWIDE",
+            "title": "Asset List",
+            "type": "TABLE"
+
+        },
+      {
+         "id":"card-lastupdated-value",
+         "dataSource":{
+            "attributes":[
+               {
+                  "aggregator":"last",
+                  "attribute":"lastupdated_A_Verizon_CAS_last",
+                  "id":"lastupdated_A_Verizon_CAS_last"
+               }
+            ]
+         },
+         "content":{
+            "attributes":[
+               {
+                  "dataSourceId":"lastupdated_A_Verizon_CAS_last",
+                  "label":"Last lastupdated"
+               }
+            ]
+         },
+         "size":"SMALLWIDE",
+         "title":"lastupdated",
+         "type":"VALUE"
+      }
+   ]
+
+}

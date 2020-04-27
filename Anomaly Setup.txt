@@ -1,0 +1,39 @@
+# Topic: Anomaly Detection Setup in monitor
+## Description: This will define the values we will predict and from there generate specific Anomaly scores from.
+
+## Metrics (Description):
+1) humidity - percentage humidity (0%-95%)
+2) temperature - temperature in Celsius (-20c to 65c +/- 0.5c)
+3) pressure - Barometric pressure in (300-1100 hPA)
+4) light - Ambient light (0-64k lux)
+5) accelX - Accelerometer axis X
+6) accelY - Accelerometer axis Y
+7) accelZ - Accelerometer axis Z
+8) battery - percentage battery left (0-100%)
+9) latitude - GPS Coordinate
+10) longitude - GPS Coordinate
+11) motionInX - Orientation X axis
+12) motionInY - Orientation Y axis
+13) motionInZ - Orientation Z axis
+14) signalStrength - -50dB to -120dB in decibels
+15) type - Static values of type of location data - ['gps','cellid']
+16) altitude - Altitude of sensor in XXXX
+17) radius - the radius window of the location, based on cellid 
+
+
+Select "AnomalyDectector" when creating new data in Monitor.
+
+## Configuration:
+We will (targets)predict humidity, temperature, and pressure based on (features) light, and prior humidity, temperature, and pressure.
+
+We will set a threshold of 10, meaning if our prediction is off by 10 (units) it will be considered an anomaly.
+
+Note that we can not use "strings" for predictions.  Lat/Long from ThingSpace come in a strings
+
+## Output are:
+predictions_humidity
+predictions_pressure
+predictions_temperature
+alerts_humidity - Boolean
+alerts_pressure - Boolean
+alerts_temperature - Boolean
